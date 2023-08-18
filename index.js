@@ -126,29 +126,25 @@ app.post("/deletetracking", async (req, res) => {
 });
 
 //******* Update Tracking Api ******//
-// app.put("/updatetracking",async (req,res)=>{
-// const {trackingid}=req.body
-//   try{
-//     let updatedata= await Tracking.findOneAndUpdate({trackingid:req.params.id},{
-//       $set:{
-//         description:req.body.description
-//       }
-//     })
-//     if(updatedata){
-//       res.send({
-    
-//           message: "Data Updated Successfully",
-//           status_code: 200,
+app.put("/updatetracking/:trackingid",async (req,res)=>{
+  const { trackingid,description } = req.body;
+  let result = await Tracking.updateOne(
+    {
+      trackingid:req.params.trackingid
+      
+  },{
+    $set:req.body
+  }
+  )
+res.send(
   
-//       })
-//     }
-    
- 
-//   }
-// catch(error){
-// console.log(error)
-// }
-// })
+  {
+  status_code:200,
+  message:"Data Updated Successfully"
+
+
+})
+}) 
 
 
 
