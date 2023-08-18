@@ -126,7 +126,7 @@ app.post("/deletetracking", async (req, res) => {
 });
 
 //******* Update Tracking Api ******//
-app.put("/updatetracking/:trackingid",async (req,res)=>{
+app.post("/updatetracking/:trackingid",async (req,res)=>{
   const { trackingid,description } = req.body;
   let result = await Tracking.updateOne(
     {
