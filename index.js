@@ -3,6 +3,7 @@ const cors = require("cors");
 require("./db/config");
 const Login = require("./db/Login");
 const Tracking = require("./db/Tracking");
+const Enquiry = require("./db/Enquiry");
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -146,7 +147,41 @@ res.send(
 })
 }) 
 
+app.post("/enquiry",async (req,res)=>{
+const {name,email,phone,message}=req.body
+if(name,email,phone,message){
+  const enquiry = await Enquiry.create({
+    name,
+    email,
+    phone,
+    message
+  })
+  res.send({
+    result: enquiry,
+  
+    message: "Api run successfully",
+    status_code: 200,
+  });
+}else{
+  res.send({
+    message:"Please Enter all fields",
+    status_code:300
+  })
+}
 
+})
+
+
+
+app.get("/enquirylist",async (req,res)=>{
+const allenquiry=await Enquiry.find({})
+res.send({
+  results:allenquiry,
+  message:"Api Run Successfully",
+  status_code:200,
+
+})
+})
 
 
 app.listen(5000, () => {
